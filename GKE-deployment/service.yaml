@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ohif-service
+spec:
+  selector:
+    app: ohif-springml
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+  type: LoadBalancer
+  loadBalancerIP: IPADDRESS
