@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: $name-server
+spec:
+  selector:
+    matchLabels:
+      run: $name-app
+  # Replicas was a property defined in schema.yaml. Its value will be
+  # substituted into $replicas
+  replicas: $replicas
+  template:
+    metadata:
+      labels:
+        run: $name-app
+    spec:
+      initContainers:
+      - name: init-myservice
+        image: gcr.io/springml-public/ohif-viewer:1.0.1
+        command: ['sh', '-c', './deploy-ohif.sh -id $oauth_client_id -ip $domain']
+      containers:
+      - name: ohif-viewer
+        image: gcr.io/springml-public/ohif-viewer/main-app:latest
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            cpu: "5"
+            memory: "3G"
+          requests:
+            cpu: "2"
+            memory: "500M"
+---
+apiVersion: "autoscaling/v2beta1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: $name-hpa
+  namespace: $namespace
+  labels:
+    app: $name-app
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: $name-app
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      targetAverageUtilization: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: $name-service
+  labels:
+    run: $name-app
+spec:
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+  selector:
+    run: $name-app

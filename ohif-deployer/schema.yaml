@@ -1,0 +1,37 @@
+x-google-marketplace:
+  schemaVersion: v2
+
+  applicationApiVersion: v1beta1
+  # The published version is required and MUST match the tag
+  # of the deployer image
+  publishedVersion: '0.1.1'
+  publishedVersionMetadata:
+    releaseNote: >-
+      A first release.
+  # The images property will be filled in during part 2
+  images:
+    ohif-viewer:
+      properties:
+        ohifViewerFull:
+          type: FULL
+
+properties:
+  name:
+    type: string
+    x-google-marketplace:
+      type: NAME
+  namespace:
+    type: string
+    x-google-marketplace:
+      type: NAMESPACE
+  replicas:
+    type: integer
+    title: OHIF Replica Count
+    description: The number of OHIF Viewer replicas to deploy
+
+required:
+- name
+- namespace
+- replicas
+- oauth_client_id
+- domain
