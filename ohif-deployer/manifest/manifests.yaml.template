@@ -16,11 +16,25 @@ spec:
     spec:
       initContainers:
       - name: init-myservice
-        image: gcr.io/springml-public/ohif-viewer:1.0.1
+        #image: gcr.io/springml-public/ohif-viewer:1.0.1
+        image: $initImage
+        imagePullPolicy: Always
         command: ['sh', '-c', './deploy-ohif.sh -id $oauth_client_id -ip $domain']
+        volumeMounts:
+        - mountPath: /var/run/docker.sock
+          name: docker-socket-volume
+        securityContext:
+          privileged: true
+      volumes:
+        - name: docker-socket-volume
+          hostPath:
+            path: /var/run/docker.sock
+            type: File
       containers:
       - name: ohif-viewer
         image: gcr.io/springml-public/ohif-viewer/main-app:latest
+        imagePullPolicy: Never
+        #image: $ohifViewerFull
         ports:
         - containerPort: 3000
         resources:
@@ -62,5 +76,6 @@ spec:
   - protocol: TCP
     port: 3000
     targetPort: 3000
+  type: LoadBalancer
   selector:
     run: $name-app

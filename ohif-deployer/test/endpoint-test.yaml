@@ -1,0 +1,8 @@
+actions:
+- name: OHIF listening
+  bashTest:
+    script: |-
+      curl http://$APP_INSTANCE_NAME-grafana.$NAMESPACE.svc.cluster.local:3000
+    expect:
+      stdout:
+        contains: 'OHIF'

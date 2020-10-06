@@ -1,0 +1,6 @@
+properties:
+  testerImage:
+    type: string
+    default: gcr.io/springml-public/ohif-viewer/tester:$TAG
+    x-google-property:
+      type: IMAGE

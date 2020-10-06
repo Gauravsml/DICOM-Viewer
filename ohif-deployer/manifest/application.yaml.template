@@ -4,13 +4,37 @@ metadata:
   name: "$name"
   namespace: "$namespace"
   annotations:
-    marketplace.cloud.google.com/deploy-info: '{"partner_id": "springml", "product_id": "ohif-viewer", "partner_name": "SpringML"}'
+    marketplace.cloud.google.com/deploy-info: '{"partner_id": "springml-public", "product_id": "one-click-dicom-viewer-on-google-cloud", "partner_name": "SpringML"}'
+    kubernetes-engine.cloud.google.com/icon: data:image/png;base64,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
   labels:
     app.kubernetes.io/name: "$name"
 spec:
   descriptor:
     type: ohif-viewer
-    version: '0.1.1'
+    version: '1.2.11'
+  maintainers:
+    - name: SpringML
+      url: https://www.springml.com
+  links:
+    - description: 'User Guide: One Click Deployment OHIF Viewer'
+      url: https://docs.google.com/document/d/1VK3a7F-5DSLNHa4aQYHgMtFvtqs94qg_7CiWCFRySSY/edit?usp=sharing
+    - description: GitHub Repository
+      url: https://github.com/springml-code/DICOM-Viewer.git
+  notes: |-
+    # Map the External IP 
+    Get the external IP of your OHIF Viewer using the following command:
+    ```
+    SERVICE_IP=$(kubectl get svc $name-service \
+      --namespace $namespace)
+    ```
+    The command shows you the external loadbalancer IP of your site.
+    # Map this IP with FQDN
+    Now create a mapping in cloud DNS or directly in the domain registrar to redirect the
+    traffic from the specified FQDN to the looadbalancer IP.
+    
+    # Open your Managed OHIF site
+    Now open the Managed OHIF site by going into the URL <FQDN:3000>.
+  
   selector:
     matchLabels:
       app.kubernetes.io/name: "$name"
