@@ -4,3 +4,4 @@ ADD . /src
 WORKDIR /src 
 # other commands
 RUN chmod +x ./deploy-ohif.sh
+RUN dos2unix deploy-ohif.sh

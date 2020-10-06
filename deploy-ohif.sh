@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 client_id=
 host_name=
 image=
@@ -38,7 +38,7 @@ while [ "$1" != "" ]; do
 done
 
 replace_statement='s/OAUTH_CLIENT_ID/'$client_id'/g'
-hostname_replace='s/HOST_NAME/'$host_name'/g'
+hostname_replace='s/HOST_NAME/'$external_ip'/g'
 
 sed -i $hostname_replace OHIF/platform/viewer/.webpack/webpack.pwa.js
 echo "Assigned Hostname"
@@ -46,13 +46,13 @@ sed -i $replace_statement OHIF/platform/viewer/public/config/google.js
 echo "Assigned ClientID"
 
 docker build -t gcr.io/springml-public/ohif-viewer/main-app OHIF/
-docker push gcr.io/springml-public/ohif-viewer/main-app
+# docker push gcr.io/springml-public/ohif-viewer/main-app
 
 # kubectl apply -f GKE-deployment/deployment.yaml
 # kubectl apply -f GKE-deployment/service.yaml
 
 default_client='s/'$client_id'/OAUTH_CLIENT_ID/g'
-default_hostname='s/'$host_name'/HOST_NAME/g'
+default_hostname='s/'$external_ip'/HOST_NAME/g'
 
 sed -i $default_hostname OHIF/platform/viewer/.webpack/webpack.pwa.js
 sed -i $default_client OHIF/platform/viewer/public/config/google.js
