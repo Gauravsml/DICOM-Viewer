@@ -11,15 +11,15 @@ metadata:
 spec:
   descriptor:
     type: ohif-viewer
-    version: '1.2.11'
+    version: '1.2.12'
   maintainers:
-    - name: SpringML
-      url: https://www.springml.com
+  - name: SpringML
+    url: https://www.springml.com
   links:
-    - description: 'User Guide: One Click Deployment OHIF Viewer'
-      url: https://docs.google.com/document/d/1VK3a7F-5DSLNHa4aQYHgMtFvtqs94qg_7CiWCFRySSY/edit?usp=sharing
-    - description: GitHub Repository
-      url: https://github.com/springml-code/DICOM-Viewer.git
+  - description: 'User Guide: One Click Deployment OHIF Viewer'
+    url: https://docs.google.com/document/d/1VK3a7F-5DSLNHa4aQYHgMtFvtqs94qg_7CiWCFRySSY/edit?usp=sharing
+  - description: GitHub Repository
+    url: https://github.com/springml-code/DICOM-Viewer.git
   notes: |-
     # Map the External IP 
     Get the external IP of your OHIF Viewer using the following command:
